@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["*"],
+      "@models/*": ["src/database/models/*"],
+      "@routes/*": ["src/routes/*"],
+      "@util/*": ["src/utils/*"],
+      "@maps/*": ["src/maps/*"],
+      "@validate/*": ["old/helper/Validation/*"],
+      "@conf": [".conf.ts"],
+      "@db/*":["old/helper/db/*"],
+      "@API/*":["src/controllers/*"]
+    }
+  }
+}

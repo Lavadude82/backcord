@@ -1,0 +1,31 @@
+{
+  "name": "backcord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "express": "^5.2.1",
+    "https": "^1.0.0",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node -r tsconfig-paths/register index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/cli-color": "^2.0.6",
+    "@types/mongoose": "^5.11.96",
+    "@types/uuid": "^10.0.0",
+    "cli-color": "^2.0.4",
+    "fs": "^0.0.1-security",
+    "mongoose": "^9.2.1",
+    "redis": "^5.11.0",
+    "tsconfig-paths": "^4.2.0",
+    "uuid": "^13.0.0"
+  }
+}

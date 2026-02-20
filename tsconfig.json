@@ -10,8 +10,8 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@*": ["*"],
       "@models/*": ["src/database/models/*"],
+      "@util/regex": ["src/utils/Regexes.ts"],
       "@routes/*": ["src/routes/*"],
       "@util/*": ["src/utils/*"],
       "@maps/*": ["src/maps/*"],
@@ -21,7 +21,7 @@
       "@dto/*":["src/controllers/dto/*"],
       "@interface/*": ["src/interfaces/*"],
       "@repo/*": ["src/repositories/*"],
-      "@util/regex": ["src/utils/Regexes.ts"]
+      "@*": ["*"],
     }
   }
 }

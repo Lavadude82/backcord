@@ -12,4 +12,4 @@ export const UserSchema = new Schema({
     createdAt: {type: Number, required: true, default: Date.now()},
     bot: {type: Boolean, required: true, default: false}
 })  
-export const UserDBS = model("users", UserSchema);
+export const UserModel = model("users", UserSchema);

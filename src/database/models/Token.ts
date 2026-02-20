@@ -6,4 +6,4 @@ export const Token = new Schema({
     createdAt: {type: Number, required: true, default: Date.now()},
 })  
 
-export const TokenDBS = model("tokens", Token);
+export const TokenModel = model("tokens", Token);

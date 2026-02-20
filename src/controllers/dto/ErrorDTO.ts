@@ -1,0 +1,10 @@
+export type AuthErrorType = {
+  type:
+    | "EMAIL_INVALID"
+    | "USERNAME_INVALID_LENGTH"
+    | "USERNAME_CONTAINS_INVALID_CHARACTERS"
+    | "PASSWORD_TOO_SHORT"
+    | "PASSWORD_REQUIREMENTS_NOT_MET"
+    | "USERNAME_IN_USE"
+    | "EMAIL_IN_USE";
+};

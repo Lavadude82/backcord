@@ -15,10 +15,13 @@
       "@routes/*": ["src/routes/*"],
       "@util/*": ["src/utils/*"],
       "@maps/*": ["src/maps/*"],
-      "@validate/*": ["old/helper/Validation/*"],
       "@conf": [".conf.ts"],
-      "@db/*":["old/helper/db/*"],
-      "@API/*":["src/controllers/*"]
+      "@db/*":["src/database*"],
+      "@API/*":["src/controllers/*"],
+      "@dto/*":["src/controllers/dto/*"],
+      "@interface/*": ["src/interfaces/*"],
+      "@repo/*": ["src/repositories/*"],
+      "@util/regex": ["src/utils/Regexes.ts"]
     }
   }
 }

@@ -1,17 +1,20 @@
-import login from "@src/routes/users/login";
+import { AuthErrorType } from "./ErrorDTO";
 
-export type UserRegistrationDTO = {
+export type CreateUserDTO = {
     displayName: string;
     username: string;
     password: string;
-    email: {
-        address?: string;
-        verified: boolean;
-    }
+    email?: string;
 }
 
-export type GenericLoginField = {
+export type LoginUserDTO = {
     username?: string;
     login?: string;
     password: string;
+}
+
+export type CreateUserResponseDTO = {
+    success: boolean;
+    error?:AuthErrorType;
+    token?: string;
 }

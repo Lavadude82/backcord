@@ -6,4 +6,5 @@ export default interface IUserRepository {
     findByUsername(username: string): Promise<GenericUserFindResponseDTO>;
     findByEmail(email: string): Promise<GenericUserFindResponseDTO>;
     findById(id: string): Promise<GenericUserFindResponseDTO>;
+    checkExistence(username: string, email: string): Promise<CreateUserResponseDTO>;
 }

@@ -5,12 +5,11 @@ import {
   CreateUserResponseDTO,
   GenericUserFindResponseDTO,
   LoginUserDTO,
-  LoginUserResponseDTO
+  LoginUserResponseDTO,
 } from "@dto/UserDTO";
 import { UserModel } from "@models/User";
 import { ValidateCreateUserDTO } from "@utils/Validate";
-import { UserExists } from "@utils/Exists";
-import { HashPass } from "@utils/Hashing";
+import { HashPass, HashPassSalt } from "@utils/Hashing";
 
 const TokenRepository = new MongooseTokenRepository();
 
@@ -19,8 +18,8 @@ export default class MongooseUserRepository implements IUserRepository {
     return new Promise((resolve, reject) => {
       ValidateCreateUserDTO(data).then((res) => {
         if (!res.success) return resolve(res);
-        UserExists(data.username, data.email!).then((res) => {
-          if (!res.success) return resolve(res);
+        this.checkExistence(data.username, data.email!).then((res) => {
+          if (!res.success) return resolve({success: false, error: {type: res.error!.type}}); //Should never Happen
 
           //Hash Password & Obtain Salt
           let { hash, salt } = HashPass(data.password);
@@ -61,10 +60,43 @@ export default class MongooseUserRepository implements IUserRepository {
       });
     });
   }
-  async login(data: LoginUserDTO): Promise <LoginUserResponseDTO> {
-    return new Promise((resolve,reject)=>{
-      
-    })
+  async login(data: LoginUserDTO): Promise<LoginUserResponseDTO> {
+    return new Promise((resolve, reject) => {
+      if (!data.username && !data.login)
+        return resolve({
+          success: false,
+          error: { type: "NO_CREDENTIALS_PROVIDED" },
+        });
+      if (data.username) {
+        this.findByUsername(data.username).then((res) => {
+          if (!res.success)
+            return resolve({ success: false, error: res.error });
+          const user = res.user!;
+          const { hash } = HashPassSalt(data.password, user.salt);
+          if (hash !== user.password)
+            return resolve({
+              success: false,
+              error: { type: "INVALID_LOGIN_CREDENTIALS" },
+            });
+          TokenRepository.create({
+            id: user.id,
+            hashed_password: hash,
+          })
+            .then((res) => {
+              if (!res.success)
+                return resolve({
+                  success: false,
+                  error: { type: "TOKEN_CREATION_FAILED" },
+                });
+
+              resolve({ success: true, token: res.token });
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        });
+      }
+    });
   }
 
   async findByUsername(username: string): Promise<GenericUserFindResponseDTO> {
@@ -102,7 +134,7 @@ export default class MongooseUserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<GenericUserFindResponseDTO> {
-   return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       UserModel.findOne({ id: id })
         .then((user) => {
           if (!user)
@@ -117,4 +149,20 @@ export default class MongooseUserRepository implements IUserRepository {
         });
     });
   }
+
+  async checkExistence(
+    username: string,
+    email: string
+  ): Promise<CreateUserResponseDTO> {
+    return new Promise((resolve, reject) => {
+    this.findByUsername(username).then((res) => {
+      if (res.success) return resolve({success: false, error: {type: "USERNAME_IN_USE"}}); //Should never Happen
+      this.findByEmail(email).then((res) => {
+        if (res.success) return resolve({success: false, error: {type: "EMAIL_IN_USE"}}); //Should never Happen
+        resolve({ success: true });
+      });
+    });
+  });
+}
+
 }

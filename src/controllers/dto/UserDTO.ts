@@ -3,38 +3,38 @@ import { UserModel, UserSchema } from "@models/User";
 import { HydratedDocument, InferSchemaType } from "mongoose";
 
 export type CreateUserDTO = {
-    displayName: string;
-    username: string;
-    password: string;
-    email?: string;
-}
+  displayName: string;
+  username: string;
+  password: string;
+  email?: string;
+};
 
 export type LoginUserDTO = {
-    username?: string;
-    login?: string;
-    password: string;
-    totp?:string;
-}
+  username?: string;
+  login?: string;
+  password: string;
+  totp?: string;
+};
 
 export type LoginUserResponseDTO = {
-    success: boolean;
-    error?:AuthErrorType;
-    token?: string;
-}
+  success: boolean;
+  error?: AuthErrorType;
+  token?: string;
+};
 
 export type CreateUserResponseDTO = {
-    success: boolean;
-    error?:AuthErrorType;
-    token?: string;
-}
+  success: boolean;
+  error?: AuthErrorType;
+  token?: string;
+};
 
 export type GenericUserFindResponseDTO = {
-    success: boolean;
-    error?:AuthErrorType;
-    user?:InferSchemaType<typeof UserSchema>;
-}
+  success: boolean;
+  error?: AuthErrorType;
+  user?: InferSchemaType<typeof UserSchema>;
+};
 
 export type GenericUserSuccessResponseDTO = {
-    success: boolean;
-    error?:AuthErrorType;
-}
+  success: boolean;
+  error?: AuthErrorType;
+};

@@ -9,8 +9,10 @@ export type AuthErrorType = {
     | "EMAIL_IN_USE"
     | "TOKEN_CREATION_FAILED"
     | "USER_NOT_FOUND"
+    | "NO_CREDENTIALS_PROVIDED"
+    | "INVALID_LOGIN_CREDENTIALS";
 };
 
 export type ServerErrorType = {
-  type: "INTERNAL_SERVER_ERROR"|"DATABASE_ERROR"|"VALIDATION_ERROR";
+  type: "INTERNAL_SERVER_ERROR" | "DATABASE_ERROR" | "VALIDATION_ERROR";
 };

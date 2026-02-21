@@ -18,3 +18,20 @@ export function HashPass(
     salt,
   }; // Computes the hash and encodes it in hexadecimal format
 }
+
+export function HashPassSalt(
+  input: string,
+  salt: string,
+): {
+  hash: string;
+  salt: string;
+} {
+  let input2 = salt + input;
+
+  return {
+    hash: createHash("sha256") // Initializes the hash object with the SHA-256 algorithm
+      .update(input2) // Feeds the input data into the hash
+      .digest("hex"),
+    salt,
+  }; // Computes the hash and encodes it in hexadecimal format
+}

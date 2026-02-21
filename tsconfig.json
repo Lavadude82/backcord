@@ -17,8 +17,7 @@
       "@utils/*": ["src/utils/*"],
       "@utils/regex": ["src/utils/Regexes"],
       "@conftype": ["src/extra/conf.type"],
-      "@conf": ["config/.conf"],
-      
+      "@conf": ["config/.conf"]
     },
     "strict": true,
     "esModuleInterop": true,

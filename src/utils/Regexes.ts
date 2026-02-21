@@ -3,4 +3,4 @@ export default {
   EmailValidRegex: /^[^\s@]+@[^\s@]+$/,
   PasswordRequirementRegex:
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&*_\-+=?])/,
-}
+};

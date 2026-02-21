@@ -1,4 +1,4 @@
-import ITokenRepository from "@interface/ITokenRepository";
+import ITokenRepository from "src/interfaces/ITokenRepository";
 import { randomBytes } from "crypto";
 import { CreateTokenDTO, CreateTokenResponseDTO } from "@dto/TokenDTO";
 import { TokenModel } from "@models/Token";

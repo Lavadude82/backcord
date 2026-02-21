@@ -16,7 +16,7 @@
       "@middleware/*": ["src/middlewares/*"],
       "@utils/*": ["src/utils/*"],
       "@utils/regex": ["src/utils/Regexes"],
-      "@conf/type": ["src/extra/conf.type"],
+      "@conftype": ["src/extra/conf.type"],
       "@conf": ["config/.conf"],
       
     },

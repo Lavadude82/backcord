@@ -1,9 +1,9 @@
-import { CreateUserDTO, CreateUserResponseDTO, GenericUserSuccessResponse, LoginUserDTO, LoginUserResponseDTO } from "@dto/UserDTO";
+import { CreateUserDTO, CreateUserResponseDTO, GenericUserFindResponseDTO, LoginUserDTO, LoginUserResponseDTO } from "@dto/UserDTO";
 
 export default interface IUserRepository {
     create(body: CreateUserDTO): Promise<CreateUserResponseDTO>;
     login (body: LoginUserDTO): Promise <LoginUserResponseDTO>;
-    findByUsername(username: string): Promise<GenericUserSuccessResponse>;
-    findByEmail(email: string): Promise<GenericUserSuccessResponse>;
-    findById(id: string): Promise<GenericUserSuccessResponse>;
+    findByUsername(username: string): Promise<GenericUserFindResponseDTO>;
+    findByEmail(email: string): Promise<GenericUserFindResponseDTO>;
+    findById(id: string): Promise<GenericUserFindResponseDTO>;
 }

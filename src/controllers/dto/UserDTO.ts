@@ -1,4 +1,6 @@
-import { AuthErrorType } from "./ErrorDTO";
+import { AuthErrorType } from "@dto/ErrorDTO";
+import { UserModel, UserSchema } from "@models/User";
+import { HydratedDocument, InferSchemaType } from "mongoose";
 
 export type CreateUserDTO = {
     displayName: string;
@@ -26,7 +28,13 @@ export type CreateUserResponseDTO = {
     token?: string;
 }
 
-export type GenericUserSuccessResponse = {
+export type GenericUserFindResponseDTO = {
+    success: boolean;
+    error?:AuthErrorType;
+    user?:InferSchemaType<typeof UserSchema>;
+}
+
+export type GenericUserSuccessResponseDTO = {
     success: boolean;
     error?:AuthErrorType;
 }

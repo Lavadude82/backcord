@@ -1,9 +1,9 @@
-import IUserRepository from "@interface/IUserRepository";
+import IUserRepository from "src/interfaces/IUserRepository";
 import MongooseTokenRepository from "./MongooseToken";
 import {
   CreateUserDTO,
   CreateUserResponseDTO,
-  GenericUserSuccessResponse,
+  GenericUserFindResponseDTO,
   LoginUserDTO,
   LoginUserResponseDTO
 } from "@dto/UserDTO";
@@ -67,22 +67,54 @@ export default class MongooseUserRepository implements IUserRepository {
     })
   }
 
-  async findByUsername(username: string): Promise<GenericUserSuccessResponse> {
-
-    return {
-      success: false
-    }
+  async findByUsername(username: string): Promise<GenericUserFindResponseDTO> {
+    return new Promise((resolve, reject) => {
+      UserModel.findOne({ username: username })
+        .then((user) => {
+          if (!user)
+            return resolve({
+              success: false,
+              error: { type: "USER_NOT_FOUND" },
+            });
+          resolve({ success: true, user: user });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
-  async findByEmail(email: string): Promise<GenericUserSuccessResponse> {
-    return {
-      success: false
-    }
+  async findByEmail(email: string): Promise<GenericUserFindResponseDTO> {
+    return new Promise((resolve, reject) => {
+      UserModel.findOne({ "email.address": email })
+        .then((user) => {
+          if (!user)
+            return resolve({
+              success: false,
+              error: { type: "USER_NOT_FOUND" },
+            });
+          resolve({ success: true, user: user });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
-  async findById(id: string): Promise<GenericUserSuccessResponse> {
-    return {
-      success: false
-    }
+  async findById(id: string): Promise<GenericUserFindResponseDTO> {
+   return new Promise((resolve, reject) => {
+      UserModel.findOne({ id: id })
+        .then((user) => {
+          if (!user)
+            return resolve({
+              success: false,
+              error: { type: "USER_NOT_FOUND" },
+            });
+          resolve({ success: true, user: user });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 }

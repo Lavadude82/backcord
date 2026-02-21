@@ -1,4 +1,4 @@
-import { DefaultConfiguration } from "@conf/type";
+import { DefaultConfiguration } from "@conftype";
 
 export default {
     //Log Level

@@ -8,6 +8,7 @@ export type AuthErrorType = {
     | "USERNAME_IN_USE"
     | "EMAIL_IN_USE"
     | "TOKEN_CREATION_FAILED"
+    | "USER_NOT_FOUND"
 };
 
 export type ServerErrorType = {

@@ -14,4 +14,5 @@ export const UserSchema = new Schema({
     createdAt: {type: Number, required: true, default: Date.now()},
     bot: {type: Boolean, required: true, default: false}
 })  
+UserSchema.toJSONSchema()
 export const UserModel = model("users", UserSchema);

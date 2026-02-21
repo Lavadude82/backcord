@@ -3,11 +3,14 @@ import MongooseTokenRepository from "./MongooseToken";
 import {
   CreateUserDTO,
   CreateUserResponseDTO,
-} from "@src/controllers/dto/UserDTO";
-import { UserModel } from "@src/database/models/User";
-import { ValidateCreateUserDTO } from "@src/utils/Validate";
-import { UserExists } from "@util/Exists";
-import { HashPass } from "@util/Hashing";
+  GenericUserSuccessResponse,
+  LoginUserDTO,
+  LoginUserResponseDTO
+} from "@dto/UserDTO";
+import { UserModel } from "@models/User";
+import { ValidateCreateUserDTO } from "@utils/Validate";
+import { UserExists } from "@utils/Exists";
+import { HashPass } from "@utils/Hashing";
 
 const TokenRepository = new MongooseTokenRepository();
 
@@ -58,10 +61,28 @@ export default class MongooseUserRepository implements IUserRepository {
       });
     });
   }
+  async login(data: LoginUserDTO): Promise <LoginUserResponseDTO> {
+    return new Promise((resolve,reject)=>{
+      
+    })
+  }
 
-  async findByUsername(username: string) {}
+  async findByUsername(username: string): Promise<GenericUserSuccessResponse> {
 
-  async findByEmail(email: string) {}
+    return {
+      success: false
+    }
+  }
 
-  async findById(id: string) {}
+  async findByEmail(email: string): Promise<GenericUserSuccessResponse> {
+    return {
+      success: false
+    }
+  }
+
+  async findById(id: string): Promise<GenericUserSuccessResponse> {
+    return {
+      success: false
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import cli from "cli-color";
 import config from "@conf";
-import timestamp from "@src/utils/timestamp";
+import timestamp from "@utils/timestamp";
 
-let enable_logging = config.LOGS;
+let enable_logging = config.LOG;
 export function rm() {
   console.clear();
 }

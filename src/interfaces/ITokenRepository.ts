@@ -1,4 +1,4 @@
-import { CreateTokenDTO, CreateTokenResponseDTO } from "@src/controllers/dto/TokenDTO";
+import { CreateTokenDTO, CreateTokenResponseDTO } from "@dto/TokenDTO";
 
 export default interface ITokenRepository {
     create(body: CreateTokenDTO): Promise<CreateTokenResponseDTO>;

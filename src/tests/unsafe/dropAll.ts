@@ -1,6 +1,6 @@
-import { connect as db_connect } from "@src/database/connect";
+import { connect as db_connect } from "@db/connect";
 import mongoose from "mongoose";
-import { err, log, yay } from "@util/c-log";
+import { err, log, yay } from "@utils/c-log";
 
 db_connect()
   .then(async (database) => {

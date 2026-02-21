@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "@node_modules/@types/express";
-import { log } from "@src/utils/c-log";
+import { Request, Response, NextFunction } from "express";
+import { log } from "@utils/c-log";
 export default async function RequestLog(
   req: Request,
   res: Response,

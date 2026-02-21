@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import { log, err, yay } from "@src/utils/c-log";
+import { log, err, yay } from "@utils/c-log";
 import config from "@conf";
 
 export function connect() {

@@ -1,9 +1,9 @@
 import ITokenRepository from "@interface/ITokenRepository";
 import { randomBytes } from "crypto";
 import { CreateTokenDTO, CreateTokenResponseDTO } from "@dto/TokenDTO";
-import { TokenModel } from "@src/database/models/Token";
-import { HashPass } from "@util/Hashing";
-import regex from "@util/Regexes";
+import { TokenModel } from "@models/Token";
+import { HashPass } from "@utils/Hashing";
+import regex from "@utils/Regexes";
 
 export default class MongooseTokenRepository implements ITokenRepository {
   async create(data: CreateTokenDTO): Promise<CreateTokenResponseDTO> {

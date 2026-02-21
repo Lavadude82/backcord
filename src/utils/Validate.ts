@@ -1,9 +1,9 @@
-import { AuthErrorType } from "@src/controllers/dto/ErrorDTO";
+import { AuthErrorType } from "@dto/ErrorDTO";
 import {
   CreateUserResponseDTO,
   CreateUserDTO,
-} from "@src/controllers/dto/UserDTO";
-import regex from "@util/Regexes";
+} from "@dto/UserDTO";
+import regex from "@utils/Regexes";
 
 export async function ValidateLength(
   max: number,

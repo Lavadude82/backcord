@@ -1,8 +1,8 @@
 import express from "express";
-import { log, err, yay, rm } from "@src/utils/c-log";
-import apiRoutes from "@src/routes/ActiveRoutes";
-import { connect as db_connect } from "@src/database/connect";
-import RequestLog from "@src/middlewares/RequestLog";
+import { log, err, yay, rm } from "@utils/c-log";
+import apiRoutes from "@routes/ActiveRoutes";
+import { connect as db_connect } from "@db/connect";
+import RequestLog from "@middleware/RequestLog";
 import config from "@conf";
 rm();
 

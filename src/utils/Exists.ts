@@ -1,5 +1,5 @@
 import { UserModel } from "@models/User";
-import { CreateUserResponseDTO } from "@src/controllers/dto/UserDTO";
+import { CreateUserResponseDTO } from "@dto/UserDTO";
 
 export async function UsernameExists(
   username: string,

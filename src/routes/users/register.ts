@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import MongooseUserRepository from "@repo/MongooseUser";
 
-import { err, yay } from "@util/c-log";
+import { err, yay } from "@utils/c-log";
 
 const UserRepository = new MongooseUserRepository();
 

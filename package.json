@@ -10,6 +10,9 @@
     "ts-node": "^10.9.2"
   },
   "scripts": {
+    "build": "tsc && tsc-alias && cd dist && node src/extra/dynamicImports.js",
+    "buildrun": "tsc && tsc-alias && cd dist && node src/extra/dynamicImports.js && node index.js",
+    "run":"cd dist && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node -r tsconfig-paths/register index.ts",
     "drop": "ts-node -r tsconfig-paths/register src/tests/unsafe/dropAll.ts"
@@ -26,7 +29,9 @@
     "fs": "^0.0.1-security",
     "mongoose": "^9.2.1",
     "redis": "^5.11.0",
+    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
     "uuid": "^13.0.0"
   }
 }

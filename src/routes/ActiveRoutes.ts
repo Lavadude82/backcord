@@ -3,5 +3,5 @@
 //@routes is the base for ./routes/  | Please use this for dynamic loading of routes in index.ts
 export default[
   "@routes/users/register",
-   "@routes/users/login",
+  // "@routes/users/login",
 ];

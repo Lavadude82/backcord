@@ -6,5 +6,10 @@ export type AuthErrorType = {
     | "PASSWORD_TOO_SHORT"
     | "PASSWORD_REQUIREMENTS_NOT_MET"
     | "USERNAME_IN_USE"
-    | "EMAIL_IN_USE";
+    | "EMAIL_IN_USE"
+    | "TOKEN_CREATION_FAILED"
+};
+
+export type ServerErrorType = {
+  type: "INTERNAL_SERVER_ERROR"|"DATABASE_ERROR"|"VALIDATION_ERROR";
 };

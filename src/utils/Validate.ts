@@ -38,7 +38,7 @@ export async function ValidateCreateUserDTO(
   data: CreateUserDTO,
 ): Promise<CreateUserResponseDTO> {
   return new Promise((resolve) => {
-    ValidateLength(16, 0, data.username).then((res) => {
+    ValidateLength(32, 0, data.username).then((res) => {
       if (!res)
         return resolve({
           success: false,

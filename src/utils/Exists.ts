@@ -5,7 +5,7 @@ export async function UsernameExists(
   username: string,
 ): Promise<CreateUserResponseDTO> {
   return new Promise((resolve, reject) => {
-    UserModel.find({ username })
+    UserModel.findOne({ username })
       .exec()
       .then((user) => {
         if (user)
@@ -22,7 +22,8 @@ export async function EmailExists(
   email: string,
 ): Promise<CreateUserResponseDTO> {
   return new Promise((resolve, reject) => {
-    UserModel.find({ email: { address: email } })
+    if (email === "undefined") return resolve({ success: true });
+    UserModel.findOne({ "email.address": email })
       .exec()
       .then((user) => {
         if (user)

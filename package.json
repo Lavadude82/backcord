@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc && tsc-alias && cd dist && node src/extra/dynamicImports.js",
     "buildrun": "tsc && tsc-alias && cd dist && node src/extra/dynamicImports.js && node index.js",
-    "run":"cd dist && node index.js",
+    "js-ver":"cd dist && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node -r tsconfig-paths/register index.ts",
     "drop": "ts-node -r tsconfig-paths/register src/tests/unsafe/dropAll.ts"

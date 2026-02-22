@@ -19,7 +19,11 @@ export default class MongooseUserRepository implements IUserRepository {
       ValidateCreateUserDTO(data).then((res) => {
         if (!res.success) return resolve(res);
         this.checkExistence(data.username, data.email!).then((res) => {
-          if (!res.success) return resolve({success: false, error: {type: res.error!.type}}); //Should never Happen
+          if (!res.success)
+            return resolve({
+              success: false,
+              error: { type: res.error!.type },
+            }); //Should never Happen
 
           //Hash Password & Obtain Salt
           let { hash, salt } = HashPass(data.password);
@@ -37,6 +41,7 @@ export default class MongooseUserRepository implements IUserRepository {
             .save()
             .then((user_bson) => {
               TokenRepository.create({
+                name: data.client || "Creation Client",
                 id: user_bson.id,
                 hashed_password: hash,
               })
@@ -79,6 +84,7 @@ export default class MongooseUserRepository implements IUserRepository {
               error: { type: "INVALID_LOGIN_CREDENTIALS" },
             });
           TokenRepository.create({
+            name: data.client || "Unknown Device",
             id: user.id,
             hashed_password: hash,
           })
@@ -94,6 +100,40 @@ export default class MongooseUserRepository implements IUserRepository {
             .catch((err) => {
               reject(err);
             });
+        });
+      }else if (data.login) {
+        this.findByEmail(data.login).then((res) => {
+          if (!res.success)
+            return resolve({ success: false, error: res.error });
+          const user = res.user!;
+          const { hash } = HashPassSalt(data.password, user.salt);
+          if (hash !== user.password)
+            return resolve({
+              success: false,
+              error: { type: "INVALID_LOGIN_CREDENTIALS" },
+            });
+          TokenRepository.create({
+            name: data.client || "Unknown Device",
+            id: user.id,
+            hashed_password: hash,
+          })
+            .then((res) => {
+              if (!res.success)
+                return resolve({
+                  success: false,
+                  error: { type: "TOKEN_CREATION_FAILED" },
+                });
+
+              resolve({ success: true, token: res.token });
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        });
+      }else{
+        return resolve({
+          success: false,
+          error: { type: "NO_CREDENTIALS_PROVIDED" },
         });
       }
     });
@@ -152,17 +192,21 @@ export default class MongooseUserRepository implements IUserRepository {
 
   async checkExistence(
     username: string,
-    email: string
+    email: string,
   ): Promise<CreateUserResponseDTO> {
     return new Promise((resolve, reject) => {
-    this.findByUsername(username).then((res) => {
-      if (res.success) return resolve({success: false, error: {type: "USERNAME_IN_USE"}}); //Should never Happen
-      this.findByEmail(email).then((res) => {
-        if (res.success) return resolve({success: false, error: {type: "EMAIL_IN_USE"}}); //Should never Happen
-        resolve({ success: true });
+      this.findByUsername(username).then((res) => {
+        if (res.success)
+          return resolve({
+            success: false,
+            error: { type: "USERNAME_IN_USE" },
+          }); //Should never Happen
+        this.findByEmail(email).then((res) => {
+          if (res.success)
+            return resolve({ success: false, error: { type: "EMAIL_IN_USE" } }); //Should never Happen
+          resolve({ success: true });
+        });
       });
     });
-  });
-}
-
+  }
 }

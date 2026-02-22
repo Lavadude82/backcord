@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 export const Token = new Schema({
+  name: { type: String, required: true, default:"Unknown Device" },
   token: { type: String, required: true },
   userId: { type: String, required: true },
   lastUsed: { type: Number, required: true, default: Date.now() },

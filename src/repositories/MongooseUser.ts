@@ -158,6 +158,7 @@ export default class MongooseUserRepository implements IUserRepository {
 
   async findByEmail(email: string): Promise<GenericUserFindResponseDTO> {
     return new Promise((resolve, reject) => {
+      if(email.length == 0) return resolve({ success: false, error: { type: "USER_NOT_FOUND" } });
       UserModel.findOne({ "email.address": email })
         .then((user) => {
           if (!user)

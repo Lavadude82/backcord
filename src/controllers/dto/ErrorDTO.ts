@@ -10,7 +10,12 @@ export type AuthErrorType = {
     | "TOKEN_CREATION_FAILED"
     | "USER_NOT_FOUND"
     | "NO_CREDENTIALS_PROVIDED"
-    | "INVALID_LOGIN_CREDENTIALS";
+    | "INVALID_LOGIN_CREDENTIALS"
+    | "EMPTY_BODY"
+    | "EMPTY_USERNAME"
+    | "EMPTY_EMAIL"
+    | "EMPTY_DISPLAY_NAME"
+    | "EMPTY_PASSWORD";
 };
 
 export type ServerErrorType = {

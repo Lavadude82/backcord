@@ -11,6 +11,7 @@ export async function ValidateLength(
   value: string,
 ): Promise<boolean> {
   return new Promise((resolve) => {
+
     if (value.length > max || value.length < min) {
       resolve(false);
     }
@@ -38,7 +39,8 @@ export async function ValidateCreateUserDTO(
   data: CreateUserDTO,
 ): Promise<CreateUserResponseDTO> {
   return new Promise((resolve) => {
-    ValidateLength(32, 0, data.username).then((res) => {
+    if (!data.username) return resolve({ success: false, error: { type: "EMPTY_USERNAME" } });
+    ValidateLength(32, 1, data.username).then((res) => {
       if (!res)
         return resolve({
           success: false,
@@ -50,7 +52,7 @@ export async function ValidateCreateUserDTO(
             success: false,
             error: { type: "USERNAME_CONTAINS_INVALID_CHARACTERS" },
           });
-
+        if (!data.password) return resolve({ success: false, error: { type: "EMPTY_PASSWORD" } });
         ValidateLength(Infinity, 8, data.password).then((res) => {
           if (!res)
             return resolve({
@@ -64,6 +66,7 @@ export async function ValidateCreateUserDTO(
                   success: false,
                   error: { type: "PASSWORD_REQUIREMENTS_NOT_MET" },
                 });
+                if(!data.email && data.email != "") return resolve({success:false,error:{type:"EMPTY_EMAIL"}});
               ValidateRegex(regex.EmailValidRegex, data.email ?? "").then(
                 (res) => {
                   if (!res && data.email)

@@ -27,9 +27,9 @@ export default class MongooseUserRepository implements IUserRepository {
 
           //Hash Password & Obtain Salt
           let { hash, salt } = HashPass(data.password);
-
+            let dispName = data.displayName ?? data.username;
           const user = new UserModel({
-            displayName: data.displayName,
+            displayName: dispName,
             username: data.username,
             password: hash,
             salt: salt,

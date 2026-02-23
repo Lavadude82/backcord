@@ -27,5 +27,5 @@ export default class MongooseTokenRepository implements ITokenRepository {
     });
   }
 
-  async findById(id: string) {}
+  async findByUserIdByToken(id: string) {}
 }

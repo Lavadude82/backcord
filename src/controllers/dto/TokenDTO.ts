@@ -11,3 +11,9 @@ export type CreateTokenResponseDTO = {
     error?:AuthErrorType;
     token?: string;
 }
+
+export type GenericUserIDFindResponseDTO = {
+  success: boolean;
+  error?: AuthErrorType;
+  id?: string;
+};

@@ -1,11 +1,9 @@
 import express, { response } from "express";
 import mongoose from "mongoose";
-import MongooseUserRepository from "@repo/MongooseUser";
+import {MongooseUser} from "@repo/MongooseUser"
 
 import { err, yay } from "@utils/c-log";
 import { AuthErrorType } from "@controllers/dto/ErrorDTO";
-
-const UserRepository = new MongooseUserRepository();
 
 export default function (
   app: express.Application,
@@ -14,7 +12,7 @@ export default function (
   // Handle API User Creation Request
   app.post("/api/v1/user/register", async (req, res) => {
     if(!req.body) return res.status(400).json({type:"EMPTY_BODY"} as AuthErrorType)
-    UserRepository.create(req.body)
+    MongooseUser.create(req.body)
       .then((response) => {
         if (!response.success) {
           err("Failed to Create User | ", response.error?.type);

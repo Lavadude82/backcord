@@ -1,5 +1,5 @@
 import IUserRepository from "src/interfaces/IUserRepository";
-import MongooseTokenRepository from "./MongooseToken";
+import {MongooseToken} from "./MongooseToken";
 import {
   CreateUserDTO,
   CreateUserResponseDTO,
@@ -11,8 +11,7 @@ import { UserModel } from "@models/User";
 import { v4 as UUIDv4 } from "uuid";
 import { ValidateCreateUserDTO } from "@utils/Validate";
 import { HashPass, HashPassSalt } from "@utils/Hashing";
-
-const TokenRepository = new MongooseTokenRepository();
+;
 
 export default class MongooseUserRepository implements IUserRepository {
   async create(data: CreateUserDTO): Promise<CreateUserResponseDTO> {
@@ -42,7 +41,7 @@ export default class MongooseUserRepository implements IUserRepository {
           user
             .save()
             .then((user_bson) => {
-              TokenRepository.create({
+              MongooseToken.create({
                 name: data.client || "Creation Client",
                 id: user_bson.id,
                 hashed_password: hash,
@@ -85,7 +84,7 @@ export default class MongooseUserRepository implements IUserRepository {
               success: false,
               error: { type: "INVALID_LOGIN_CREDENTIALS" },
             });
-          TokenRepository.create({
+          MongooseToken.create({
             name: data.client || "Unknown Device",
             id: user.id,
             hashed_password: hash,
@@ -114,7 +113,7 @@ export default class MongooseUserRepository implements IUserRepository {
               success: false,
               error: { type: "INVALID_LOGIN_CREDENTIALS" },
             });
-          TokenRepository.create({
+          MongooseToken.create({
             name: data.client || "Unknown Device",
             id: user.id,
             hashed_password: hash,
@@ -213,3 +212,5 @@ export default class MongooseUserRepository implements IUserRepository {
     });
   }
 }
+
+export const MongooseUser = new MongooseUserRepository();

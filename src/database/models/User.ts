@@ -14,4 +14,4 @@ export const UserSchema = new Schema({
   bot: { type: Boolean, required: true, default: false },
 });
 UserSchema.toJSONSchema();
-export const UserModel = model("users", UserSchema);
+export const UserModel = model("Users", UserSchema);

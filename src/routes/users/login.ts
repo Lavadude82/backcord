@@ -1,10 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import MongooseUserRepository from "@repo/MongooseUser";
-
+import {MongooseUser} from "@repo/MongooseUser"
 import { err, yay } from "@utils/c-log";
 
-const UserRepository = new MongooseUserRepository();
+
 
 export default function (
   app: express.Application,
@@ -12,7 +11,7 @@ export default function (
 ) {
   // Handle API User Creation Request
   app.post("/api/v1/user/login", async (req, res) => {
-    UserRepository.login(req.body)
+    MongooseUser.login(req.body)
       .then((response) => {
         if (!response.success) {
           err("Failed to Login User | ", response.error?.type);

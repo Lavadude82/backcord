@@ -1,6 +1,7 @@
-import { CreateTokenDTO, CreateTokenResponseDTO } from "@dto/TokenDTO";
+
+import { CreateTokenDTO, CreateTokenResponseDTO, GetUserByTokenDTO,GetUserByTokenResponseDTO } from "@dto/TokenDTO";
 
 export default interface ITokenRepository {
     create(body: CreateTokenDTO): Promise<CreateTokenResponseDTO>;
-    findByUserIdByToken(id: string): Promise<any>;
+    findUserByToken(token: string): Promise<GetUserByTokenResponseDTO>;
 }

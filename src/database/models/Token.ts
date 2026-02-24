@@ -14,4 +14,4 @@ export const Token = new Schema({
   }, //7 Days
 });
 
-export const TokenModel = model("tokens", Token);
+export const TokenModel = model("Tokens", Token);

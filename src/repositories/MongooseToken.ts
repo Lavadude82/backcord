@@ -3,7 +3,7 @@ import { randomBytes } from "crypto";
 import { CreateTokenDTO, CreateTokenResponseDTO } from "@dto/TokenDTO";
 import { TokenModel } from "@models/Token";
 import { HashPass } from "@utils/Hashing";
-import regex from "@utils/Regexes";
+import {v4 as UUIDv4} from "uuid";
 
 export default class MongooseTokenRepository implements ITokenRepository {
   async create(data: CreateTokenDTO): Promise<CreateTokenResponseDTO> {
@@ -14,6 +14,7 @@ export default class MongooseTokenRepository implements ITokenRepository {
         token: HashPass(
           pretoken.slice(0, 32) + data.hashed_password + pretoken.slice(32),
         ).hash,
+        id: UUIDv4(),
         userId: data.id,
       });
       token

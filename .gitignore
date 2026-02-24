@@ -1,7 +1,10 @@
 # Custom Configuration files
 .conf.ts
 
-# Logs
+#API TESTS
+Backcord\ API/
+
+# Log
 logs
 *.log
 npm-debug.log*

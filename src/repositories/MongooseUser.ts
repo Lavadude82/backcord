@@ -8,6 +8,7 @@ import {
   LoginUserResponseDTO,
 } from "@dto/UserDTO";
 import { UserModel } from "@models/User";
+import { v4 as UUIDv4 } from "uuid";
 import { ValidateCreateUserDTO } from "@utils/Validate";
 import { HashPass, HashPassSalt } from "@utils/Hashing";
 
@@ -27,9 +28,10 @@ export default class MongooseUserRepository implements IUserRepository {
 
           //Hash Password & Obtain Salt
           let { hash, salt } = HashPass(data.password);
-            let dispName = data.displayName ?? data.username;
+          let dispName = data.displayName ?? data.username;
           const user = new UserModel({
             displayName: dispName,
+            id: UUIDv4(),
             username: data.username,
             password: hash,
             salt: salt,
@@ -101,7 +103,7 @@ export default class MongooseUserRepository implements IUserRepository {
               reject(err);
             });
         });
-      }else if (data.login) {
+      } else if (data.login) {
         this.findByEmail(data.login).then((res) => {
           if (!res.success)
             return resolve({ success: false, error: res.error });
@@ -130,7 +132,7 @@ export default class MongooseUserRepository implements IUserRepository {
               reject(err);
             });
         });
-      }else{
+      } else {
         return resolve({
           success: false,
           error: { type: "NO_CREDENTIALS_PROVIDED" },
@@ -158,7 +160,7 @@ export default class MongooseUserRepository implements IUserRepository {
 
   async findByEmail(email: string): Promise<GenericUserFindResponseDTO> {
     return new Promise((resolve, reject) => {
-      if(email.length == 0) return resolve({ success: false, error: { type: "USER_NOT_FOUND" } });
+      if (email.length == 0) return resolve({ success: false, error: { type: "USER_NOT_FOUND" } });
       UserModel.findOne({ "email.address": email })
         .then((user) => {
           if (!user)

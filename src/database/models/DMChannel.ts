@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-export const DirectMessageChannel = new Schema({
+export const DMChannel = new Schema({
   name: { type: String, required: true, default:"New DM" },
   id: {type: String, required:true},
   users: {type:[String], required:true},
@@ -7,4 +7,4 @@ export const DirectMessageChannel = new Schema({
   createdAt: { type: Number, required: true, default: Date.now() },
 });
 
-export const DMChannelModel = model("DMChannels", DirectMessageChannel);
+export const DMChannelModel = model("DMChannels", DMChannel);

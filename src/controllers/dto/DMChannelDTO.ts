@@ -1,10 +1,16 @@
-import { AuthErrorType } from "@dto/ErrorDTO";
-import { UserModel, UserSchema } from "@models/User";
+import { AuthErrorType, DMChannelErrorType } from "@dto/ErrorDTO";
+import { DMChannel } from "@models/DMChannel";
+import { UserSchema } from "@models/User";
 import { HydratedDocument, InferSchemaType } from "mongoose";
 
 export type CreateDMChannelDTO = {
   token: string;
   users: string[];
+}
+export type CreateDMChannelResponseDTO = {
+  success: boolean;
+  error?:DMChannelErrorType;
+  dmChannel?: InferSchemaType<typeof DMChannel>;
 }
 
 export type AddUsersDMChannelDTO = {
